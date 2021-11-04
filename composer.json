@@ -1,0 +1,13 @@
+{
+  "name": "zcstation/test",
+  "description": "测试",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "zcstation\\": "src"
+    }
+  }
+}
