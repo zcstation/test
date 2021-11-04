@@ -10,4 +10,9 @@ class Test
     {
         echo $message . PHP_EOL;
     }
+
+    public static function bye()
+    {
+        echo "Bye!" . PHP_EOL;
+    }
 }
