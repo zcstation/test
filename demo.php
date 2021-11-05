@@ -4,7 +4,7 @@ use Swoole\Http\Request;
 use Swoole\Http\Response;
 use zcstation\ZServer;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/src/ZServer.php';
 
 $server = new ZServer();
 
