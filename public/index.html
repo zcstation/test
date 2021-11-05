@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket演示</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .websocket {
+            width: 1024px;
+            height: 640px;
+            overflow-y: scroll;
+            border: 1px solid;
+            border-image: linear-gradient(to right, orangered, dodgerblue) 30 30;
+            font-size: 14px;
+            line-height: 28px;
+            padding: 10px 5px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<div class="websocket" id="container">
+    <div id="app"></div>
+</div>
+<script>
+    function webSocketTest() {
+        function append(text) {
+            let div = document.createElement('div');
+            div.innerText = '[ ' + (new Date()).toLocaleString() + ' ] ' + text;
+            document.querySelector('#app').appendChild(div);
+            document.querySelector('#container').scrollTop = document.querySelector('#app').clientHeight;
+        }
+
+        if ("WebSocket" in window) {
+            const wsServer = 'ws://' + location.host + '/websocket';
+            const websocket = new WebSocket(wsServer);
+            websocket.onopen = function (evt) {
+                append("成功连接到服务器：" + wsServer);
+                websocket.send("Hello,world");
+                append("发送数据：Hello,world");
+            };
+
+            websocket.onclose = function (evt) {
+                append("与服务器连接已断开");
+            };
+
+            websocket.onmessage = function (evt) {
+                append("收到数据：" + evt.data);
+            };
+
+            websocket.onerror = function (evt, e) {
+                append("发生了错误：" + evt.data + '(' + e.message + ')');
+            };
+        } else {
+            // 浏览器不支持 WebSocket
+            append("您的浏览器不支持 WebSocket!");
+        }
+    }
+
+    window.onload = webSocketTest;
+</script>
+</body>
+</html>

@@ -1,13 +1,16 @@
 {
   "name": "zcstation/test",
-  "description": "测试",
+  "description": "Swoole协程版Http服务器及WebSocket服务器",
   "type": "library",
   "license": "MIT",
   "minimum-stability": "dev",
-  "require": {},
   "autoload": {
     "psr-4": {
       "zcstation\\": "src"
     }
+  },
+  "require": {
+    "php": ">=7.0.0",
+    "ext-json": "*"
   }
 }
